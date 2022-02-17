@@ -17,7 +17,7 @@ end)
 -- Functions
 
 local function skyCam(bool)
-    TriggerEvent('qb-weathersync:client:DisableSync')
+    --TriggerEvent('qb-weathersync:client:DisableSync')
     if bool then
         DoScreenFadeIn(1000)
         SetTimecycleModifier('hud_def_blur')
@@ -61,7 +61,7 @@ RegisterNetEvent('qb-multicharacter:client:closeNUIdefault', function() -- This 
     SetEntityVisible(PlayerPedId(), true)
     Wait(500)
     DoScreenFadeIn(250)
-    TriggerEvent('qb-weathersync:client:EnableSync')
+    --TriggerEvent('qb-weathersync:client:EnableSync')
     TriggerEvent('qb-clothes:client:CreateFirstCharacter')
 end)
 

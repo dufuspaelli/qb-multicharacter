@@ -202,7 +202,7 @@ $(document).on('click', '#create', function (e) {
     const regTest = new RegExp(profList.join('|'), 'i');
     //An Ugly check of null objects
 
-    if (!firstname || !lastname || !nationality || !birthdate || hasWhiteSpace(firstname) || hasWhiteSpace(lastname)|| hasWhiteSpace(nationality) ){
+    if (!firstname || !lastname || hasWhiteSpace(firstname) || hasWhiteSpace(lastname)|| hasWhiteSpace(nationality) ){
         console.log("FIELDS REQUIRED")
         return false;
     }
