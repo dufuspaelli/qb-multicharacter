@@ -381,7 +381,6 @@ i#close-reg {
 }
 
 select {
-    position: absolute;
     border: none;
     border: .3vh solid #444444;
     background-color: #171717;
