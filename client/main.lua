@@ -3,22 +3,25 @@ local charPed = nil
 local QBCore = exports['qb-core']:GetCoreObject()
 
 -- Main Thread
+local ran = true
 
---[[ CreateThread(function()
+RegisterNUICallback('loadin', function(Value)
+    if not ran then 
+        --ShutdownLoadingScreenNui()
+        ran = true 
+        print("RAN")
+        --TriggerEvent('qb-multicharacter:client:chooseChar')
+    end
+end)
+
+CreateThread(function()
 	while true do
 		Wait(0)
-		if NetworkIsSessionStarted() then
+		if NetworkIsSessionStarted() and ran then
 			TriggerEvent('qb-multicharacter:client:chooseChar')
 			return
 		end
 	end
-end) ]]
-
-RegisterNUICallback('loadIn', function(Value)
-    if Value then 
-        ShutdownLoadingScreenNui()
-        TriggerEvent('qb-multicharacter:client:chooseChar')
-    end
 end)
 
 -- Functions
@@ -81,6 +84,7 @@ RegisterNetEvent('qb-multicharacter:client:closeNUI', function()
 end)
 
 RegisterNetEvent('qb-multicharacter:client:chooseChar', function()
+    print("RAN")
     DoScreenFadeOut(10)
     Wait(1000)
     local interior = GetInteriorAtCoords(Config.Interior.x, Config.Interior.y, Config.Interior.z - 18.9)
@@ -91,8 +95,8 @@ RegisterNetEvent('qb-multicharacter:client:chooseChar', function()
     FreezeEntityPosition(PlayerPedId(), true)
     SetEntityCoords(PlayerPedId(), Config.HiddenCoords.x, Config.HiddenCoords.y, Config.HiddenCoords.z)
     Wait(1500)
-   -- ShutdownLoadingScreen()
-    --ShutdownLoadingScreenNui()
+    ShutdownLoadingScreen()
+    ShutdownLoadingScreenNui()
     openCharMenu(true)
 end)
 

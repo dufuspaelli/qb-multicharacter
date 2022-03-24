@@ -91,9 +91,7 @@ function setupCharInfo(cData) {
         if (cData.charinfo.gender == 1) { gender = "Woman" }
         $('.character-info-valid').html(
         '<div class="character-info-box"><span id="info-label">Name: </span><span class="char-info-js">'+cData.charinfo.firstname+' '+cData.charinfo.lastname+'</span></div>' +
-        '<div class="character-info-box"><span id="info-label">Birth date: </span><span class="char-info-js">'+cData.charinfo.birthdate+'</span></div>' +
         '<div class="character-info-box"><span id="info-label">Gender: </span><span class="char-info-js">'+gender+'</span></div>' +
-        '<div class="character-info-box"><span id="info-label">Nationality: </span><span class="char-info-js">'+cData.charinfo.nationality+'</span></div>' +
         '<div class="character-info-box"><span id="info-label">Job: </span><span class="char-info-js">'+cData.job.label+'</span></div>' +
         '<div class="character-info-box"><span id="info-label">Cash: </span><span class="char-info-js">&#36; '+cData.money.cash+'</span></div>' +
         '<div class="character-info-box"><span id="info-label">Bank: </span><span class="char-info-js">&#36; '+cData.money.bank+'</span></div>' +
@@ -195,7 +193,7 @@ function hasWhiteSpace(s) {
   }
 $(document).on('click', '#create', function (e) {
     e.preventDefault();
-
+    let job = escapeHtml($('select[name=job]').val())
     let firstname= escapeHtml($('#first_name').val())
     let lastname= escapeHtml($('#last_name').val())
     let nationality= escapeHtml($('#nationality').val())
@@ -220,6 +218,7 @@ $(document).on('click', '#create', function (e) {
         lastname: lastname,
         nationality: nationality,
         birthdate: birthdate,
+        job: job,
         gender: gender,
         cid: cid,
     }));

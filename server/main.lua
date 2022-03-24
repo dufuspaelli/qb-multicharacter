@@ -19,6 +19,11 @@ local function GiveStarterItems(source)
         end
         Player.Functions.AddItem(v.item, v.amount, false, info)
     end
+    if Player.PlayerData.job.name == 'police' then 
+        for k, v in pairs (QBCore.Shared.PoliceStarterItems) do
+            Player.Functions.AddItem(v.item, v.amount, false, info)
+        end
+    end
 end
 
 local function loadHouseData()
@@ -88,6 +93,17 @@ RegisterNetEvent('qb-multicharacter:server:createCharacter', function(data)
     local newData = {}
     newData.cid = data.cid
     newData.charinfo = data
+    if data.job == 'cop' then 
+        newData.job = {}
+        newData.job.name = "police"
+        newData.job.onduty = true
+        newData.job.payment = 50
+        newData.job.label = "Law Enforcement"
+        newData.job.grade = {}
+        newData.job.grade.name = "Recruit"
+        newData.job.grade.level = 0
+        newData.job.isboss = false
+    end
     if QBCore.Player.Login(src, false, newData) then
         if Config.StartingApartment then
             local randbucket = (GetPlayerPed(src) .. math.random(1,999))
