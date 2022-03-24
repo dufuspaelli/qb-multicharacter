@@ -3,7 +3,7 @@ local charPed = nil
 local QBCore = exports['qb-core']:GetCoreObject()
 
 -- Main Thread
-local ran = true
+local ran = false
 
 RegisterNUICallback('loadin', function(Value)
     if not ran then 
