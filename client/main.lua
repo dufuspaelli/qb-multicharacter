@@ -4,7 +4,7 @@ local QBCore = exports['qb-core']:GetCoreObject()
 
 -- Main Thread
 
-CreateThread(function()
+--[[ CreateThread(function()
 	while true do
 		Wait(0)
 		if NetworkIsSessionStarted() then
@@ -12,6 +12,13 @@ CreateThread(function()
 			return
 		end
 	end
+end) ]]
+
+RegisterNUICallback('loadIn', function(Value)
+    if Value then 
+        ShutdownLoadingScreenNui()
+        TriggerEvent('qb-multicharacter:client:chooseChar')
+    end
 end)
 
 -- Functions
@@ -74,7 +81,6 @@ RegisterNetEvent('qb-multicharacter:client:closeNUI', function()
 end)
 
 RegisterNetEvent('qb-multicharacter:client:chooseChar', function()
-    SetNuiFocus(false, false)
     DoScreenFadeOut(10)
     Wait(1000)
     local interior = GetInteriorAtCoords(Config.Interior.x, Config.Interior.y, Config.Interior.z - 18.9)
@@ -85,8 +91,8 @@ RegisterNetEvent('qb-multicharacter:client:chooseChar', function()
     FreezeEntityPosition(PlayerPedId(), true)
     SetEntityCoords(PlayerPedId(), Config.HiddenCoords.x, Config.HiddenCoords.y, Config.HiddenCoords.z)
     Wait(1500)
-    ShutdownLoadingScreen()
-    ShutdownLoadingScreenNui()
+   -- ShutdownLoadingScreen()
+    --ShutdownLoadingScreenNui()
     openCharMenu(true)
 end)
 
