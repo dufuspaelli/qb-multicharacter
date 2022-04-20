@@ -168,12 +168,31 @@ end)
 QBCore.Functions.CreateCallback("qb-multicharacter:server:setupCharacters", function(source, cb)
     local license = QBCore.Functions.GetIdentifier(source, 'license')
     local plyChars = {}
+    local suspension = MySQL.Sync.fetchAll('SELECT * FROM suspensions WHERE license = ?', {license}) or false
+    if suspension[1] == nil then suspension = false end
+
     MySQL.Async.fetchAll('SELECT * FROM players WHERE license = ?', {license}, function(result)
         for i = 1, (#result), 1 do
             result[i].charinfo = json.decode(result[i].charinfo)
             result[i].money = json.decode(result[i].money)
             result[i].job = json.decode(result[i].job)
-            plyChars[#plyChars+1] = result[i]
+            local plicense = result[i].license
+           -- print(plicense)
+            --print("ostime:"..os.time())
+            
+            if suspension and os.time() > suspension[1].expire then
+                --print("expire:"..suspension[1].expire)
+                suspension = false
+                MySQL.Async.execute('DELETE FROM suspensions WHERE license = ?', { plicense })
+            end
+            if suspension and suspension[1].permission == "police" and result[i].job.name == "police" then 
+                --print("suspended cop characters, don't allow login")
+                result[i].suspended = true
+                plyChars[#plyChars+1] = result[i]
+            else
+                result[i].suspended = false
+                plyChars[#plyChars+1] = result[i]
+            end
         end
         cb(plyChars)
     end)

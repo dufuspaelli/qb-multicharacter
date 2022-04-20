@@ -136,9 +136,20 @@ $(document).on('click', '.character', function(e) {
                 cData: cDataPed
             }));
         } else {
+            console.log(cDataPed)
             $(selectedChar).addClass("char-selected");
             setupCharInfo($(this).data('cData'))
-            $("#play-text").html("Play");
+            if (cDataPed.suspended) {
+                $("#play-text").html("Suspended");
+                $("#play").css({"background-color":"#666"});
+                $("#play").prop('disabled', true)
+                $("#job option:nth-child(2)").css({"display":"none"})
+            } else {
+                $("#play-text").html("Play");
+                $("#play").prop('disabled', false)
+                $("#play").css({"background-color":"#28a745"});
+            }
+      
             $("#delete-text").html("Delete");
             $("#play").css({"display":"block"});
             $("#delete").css({"display":"block"});
@@ -159,9 +170,20 @@ $(document).on('click', '.character', function(e) {
                 cData: cDataPed
             }));
         } else {
+            console.log(cDataPed)
             $(selectedChar).addClass("char-selected");
             setupCharInfo($(this).data('cData'))
-            $("#play-text").html("Play");
+            if (cDataPed.suspended) {
+                $("#play-text").html("Suspended");
+                $("#play").css({"background-color":"#666"});
+                $("#play").prop('disabled', true)
+                $("#job option:nth-child(2)").css({"display":"none"})
+            } else {
+                $("#play-text").html("Play");
+                $("#play").prop('disabled', false)
+                $("#play").css({"background-color":"#28a745"});
+            }
+      
             $("#delete-text").html("Delete");
             $("#play").css({"display":"block"});
             $("#delete").css({"display":"block"});
