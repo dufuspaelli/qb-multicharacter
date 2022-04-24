@@ -378,6 +378,7 @@ i#close-reg {
     text-align: center;
     transition: all 0.2s ease-in-out;
     cursor: text;
+    font-size: 1.3rem;
 }
 
 select {
@@ -401,6 +402,8 @@ select {
     text-overflow: '';
     transition: all 0.2s ease-in-out;
     cursor: pointer;
+    margin-top: 1rem;
+    font-size: 1.3rem;
 }
 
 select:hover {
