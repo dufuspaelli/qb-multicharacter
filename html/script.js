@@ -105,6 +105,9 @@ function setupCharacters(characters) {
     $.each(characters, function(index, char){
         $('#char-'+char.cid).html("");
         $('#char-'+char.cid).data("citizenid", char.citizenid);
+        if (char.suspended) {
+            $("#job option:nth-child(2)").remove()
+        }
         setTimeout(function(){
             $('#char-'+char.cid).html('<span id="slot-name">'+char.charinfo.firstname+' '+char.charinfo.lastname+'<span id="cid">' + char.citizenid + '</span></span>');
             $('#char-'+char.cid).data('cData', char)
